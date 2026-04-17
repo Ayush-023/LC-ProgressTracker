@@ -8,7 +8,7 @@ interface ProblemListProps {
   onToggle: (id: string) => void;
 }
 
-const ProblemList: React.FC<ProblemListProps> = ({ problems, progress, onToggle }) => {
+const ProblemList: React.FC<ProblemListProps> = React.memo(({ problems, progress, onToggle }) => {
   return (
     <div className="max-w-4xl mx-auto px-4 py-6 pb-12 space-y-2">
       {problems.length === 0 ? (
@@ -27,6 +27,8 @@ const ProblemList: React.FC<ProblemListProps> = ({ problems, progress, onToggle 
       )}
     </div>
   );
-};
+});
+
+ProblemList.displayName = 'ProblemList';
 
 export default ProblemList;

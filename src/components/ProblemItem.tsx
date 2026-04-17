@@ -7,17 +7,27 @@ interface ProblemItemProps {
   onToggle: (id: string) => void;
 }
 
-const ProblemItem: React.FC<ProblemItemProps> = ({ problem, isSolved, onToggle }) => {
+const ProblemItem: React.FC<ProblemItemProps> = React.memo(({ problem, isSolved, onToggle }) => {
+  const handleDoubleClick = () => {
+    onToggle(problem.id);
+  };
+
   return (
-    <div className={`card p-3 flex items-center justify-between gap-3 cursor-pointer transition-all duration-150 ${
-      isSolved ? 'opacity-50 hover:opacity-60' : 'hover:bg-zinc-800/60 hover:border-zinc-700 hover:scale-[1.01]'
-    } active:scale-[0.99]`}>
+    <div 
+      className={`flex items-center justify-between gap-3 p-3 rounded-xl bg-zinc-900/60 border border-zinc-800/50 transition-all duration-150 cursor-pointer ${
+        isSolved 
+          ? 'opacity-50 hover:opacity-60' 
+          : 'hover:bg-zinc-800/60 hover:border-zinc-700 hover:scale-[1.01] active:scale-[0.99]'
+      }`}
+      onDoubleClick={handleDoubleClick}
+    >
       <div className="flex items-center gap-3 flex-1 min-w-0">
         <input
           type="checkbox"
           checked={isSolved}
           onChange={() => onToggle(problem.id)}
-          className="w-5 h-5 flex-shrink-0 rounded border border-zinc-700 bg-zinc-900 cursor-pointer transition-transform duration-150 hover:scale-110 active:scale-90 appearance-none checked:bg-green-500 checked:border-green-500"
+          className="w-5 h-5 flex-shrink-0"
+          aria-label={`Mark ${problem.title} as ${isSolved ? 'unsolved' : 'solved'}`}
         />
         <div className="flex-1 min-w-0">
           <h3 className={`text-[13px] font-medium transition-all duration-150 ${
@@ -35,7 +45,7 @@ const ProblemItem: React.FC<ProblemItemProps> = ({ problem, isSolved, onToggle }
             </span>
             <div className="flex flex-wrap gap-1">
               {problem.topics.map((topic, idx) => (
-                <span key={`${problem.id}-${topic}-${idx}`} className="text-[11px] text-zinc-400 bg-zinc-800/30 px-2 py-0.5 rounded-md">
+                <span key={`${problem.id}-${topic}-${idx}`} className="text-[11px] text-zinc-400">
                   {topic}
                 </span>
               ))}
@@ -47,13 +57,16 @@ const ProblemItem: React.FC<ProblemItemProps> = ({ problem, isSolved, onToggle }
         href={problem.link}
         target="_blank"
         rel="noopener noreferrer"
-        className="text-zinc-500 hover:text-zinc-300 text-sm px-2 py-1 rounded-lg hover:bg-zinc-800/30 transition-all duration-150 flex-shrink-0"
+        className="text-zinc-500 hover:text-zinc-300 text-sm px-2 py-1 rounded-lg transition-all duration-150 flex-shrink-0"
         title="Open on LeetCode"
+        onClick={(e) => e.stopPropagation()}
       >
         ↗
       </a>
     </div>
   );
-};
+});
+
+ProblemItem.displayName = 'ProblemItem';
 
 export default ProblemItem;

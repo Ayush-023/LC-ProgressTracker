@@ -40,4 +40,26 @@
   .btn-secondary {
     @apply inline-flex items-center justify-center px-3 py-1.5 rounded-lg text-sm font-medium transition-all duration-150 ease-out bg-zinc-900/40 text-zinc-100 border border-zinc-800 hover:bg-zinc-800/60 hover:border-zinc-700 active:scale-95;
   }
+
+  .btn-reset {
+    @apply inline-flex items-center justify-center px-3 py-1.5 rounded-lg text-sm font-medium transition-all duration-150 ease-out bg-zinc-900/40 text-zinc-100 border border-zinc-800 hover:bg-red-950/30 hover:border-red-700/50 active:scale-95;
+  }
+
+  /* Custom checkbox styling */
+  input[type='checkbox'] {
+    @apply cursor-pointer appearance-none w-5 h-5 rounded border border-zinc-700 bg-zinc-900 transition-transform duration-150;
+    accent-color: rgb(34, 197, 94);
+  }
+
+  input[type='checkbox']:hover {
+    @apply scale-110;
+  }
+
+  input[type='checkbox']:active {
+    @apply scale-90;
+  }
+
+  input[type='checkbox']:checked {
+    @apply bg-green-500 border-green-500;
+  }
 }

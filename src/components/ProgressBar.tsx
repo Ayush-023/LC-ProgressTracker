@@ -12,7 +12,7 @@ const ProgressBar: React.FC<ProgressBarProps> = ({ percentage }) => {
           className="bg-green-500 h-2 rounded-full transition-all duration-500 ease-out"
           style={{ 
             width: `${percentage}%`,
-            boxShadow: `0 0 8px rgba(34, 197, 94, 0.4)`
+            boxShadow: '0 0 8px rgba(34, 197, 94, 0.4)'
           }}
         />
       </div>

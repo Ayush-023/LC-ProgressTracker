@@ -22,15 +22,6 @@ const StatsPanel: React.FC<StatsPanelProps> = ({ problems, progress }) => {
     }
   );
 
-  const getIconColor = (difficulty: string) => {
-    switch (difficulty) {
-      case 'Easy': return '🟢';
-      case 'Medium': return '🟡';
-      case 'Hard': return '🔴';
-      default: return '⚪';
-    }
-  };
-
   return (
     <div className="max-w-4xl mx-auto px-4 py-6 space-y-4">
       <h2 className="text-md font-medium text-zinc-100">By Difficulty</h2>
@@ -48,18 +39,17 @@ const StatsPanel: React.FC<StatsPanelProps> = ({ problems, progress }) => {
                           'bg-red-500';
           return (
             <div key={difficulty} className={`card p-4 border-2 ${borderColor}`}>
-              <div className="flex items-center justify-between mb-2">
+              <div className="flex items-center justify-between mb-3">
                 <h3 className="text-sm font-medium text-zinc-100">{difficulty}</h3>
-                <span className={`text-xs font-semibold ${textColor}`}>{getIconColor(difficulty)}</span>
+                <span className={`text-xs font-semibold ${textColor}`}>{solved}/{total}</span>
               </div>
-              <p className="text-2xl font-semibold text-zinc-100 mb-2">{solved}/{total}</p>
-              <div className="w-full bg-zinc-800 rounded-full h-1.5 overflow-hidden mb-2">
+              <div className="w-full bg-zinc-800 rounded-full h-2 overflow-hidden">
                 <div
-                  className={`h-1.5 rounded-full transition-all duration-150 ${barColor}`}
+                  className={`h-2 rounded-full transition-all duration-500 ease-out ${barColor}`}
                   style={{ width: `${percent}%` }}
                 />
               </div>
-              <p className="text-xs text-zinc-400">{percent}% complete</p>
+              <p className="text-xs text-zinc-400 mt-2">{percent}% complete</p>
             </div>
           );
         })}
