@@ -1,0 +1,1 @@
+export const PROGRESS_KEY = 'lc_tracker_progress';
