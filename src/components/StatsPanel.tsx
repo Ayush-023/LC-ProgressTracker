@@ -10,7 +10,7 @@ const StatsPanel: React.FC<StatsPanelProps> = ({ problems, progress }) => {
   const stats = problems.reduce(
     (acc, problem) => {
       acc[problem.difficulty].total++;
-      if (progress[problem.id]) {
+      if (progress[problem.id.toString()]) {
         acc[problem.difficulty].solved++;
       }
       return acc;

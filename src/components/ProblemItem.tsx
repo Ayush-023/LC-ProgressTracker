@@ -4,7 +4,7 @@ import type { Problem } from '../types/Problem';
 interface ProblemItemProps {
   problem: Problem;
   isSolved: boolean;
-  onToggle: (id: string) => void;
+  onToggle: (id: number) => void;
 }
 
 const ProblemItem: React.FC<ProblemItemProps> = React.memo(({ problem, isSolved, onToggle }) => {
@@ -43,18 +43,14 @@ const ProblemItem: React.FC<ProblemItemProps> = React.memo(({ problem, isSolved,
             }`}>
               {problem.difficulty}
             </span>
-            <div className="flex flex-wrap gap-1">
-              {problem.topics.map((topic, idx) => (
-                <span key={`${problem.id}-${topic}-${idx}`} className="text-[11px] text-zinc-400">
-                  {topic}
-                </span>
-              ))}
-            </div>
+            <span className="text-[11px] text-zinc-400">
+              {problem.topic}
+            </span>
           </div>
         </div>
       </div>
       <a
-        href={problem.link}
+        href={problem.url}
         target="_blank"
         rel="noopener noreferrer"
         className="text-zinc-500 hover:text-zinc-300 text-sm px-2 py-1 rounded-lg transition-all duration-150 flex-shrink-0"

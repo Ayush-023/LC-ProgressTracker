@@ -5,7 +5,7 @@ import ProblemItem from './ProblemItem';
 interface ProblemListProps {
   problems: Problem[];
   progress: Record<string, boolean>;
-  onToggle: (id: string) => void;
+  onToggle: (id: number) => void;
 }
 
 const ProblemList: React.FC<ProblemListProps> = React.memo(({ problems, progress, onToggle }) => {
@@ -20,7 +20,7 @@ const ProblemList: React.FC<ProblemListProps> = React.memo(({ problems, progress
           <ProblemItem
             key={problem.id}
             problem={problem}
-            isSolved={progress[problem.id] || false}
+            isSolved={progress[problem.id.toString()] || false}
             onToggle={onToggle}
           />
         ))

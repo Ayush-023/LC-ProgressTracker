@@ -30,7 +30,7 @@ function App() {
   const allTopics = useMemo(() => {
     const topics = new Set<string>();
     problems.forEach((problem) => {
-      problem.topics.forEach((t) => topics.add(t));
+      topics.add(problem.topic);
     });
     return Array.from(topics).sort();
   }, [problems]);
@@ -38,9 +38,9 @@ function App() {
   const filteredProblems = useMemo(() => {
     return problems.filter((problem) => {
       if (difficultyFilter && problem.difficulty !== difficultyFilter) return false;
-      if (topicFilter && !problem.topics.includes(topicFilter)) return false;
+      if (topicFilter && problem.topic !== topicFilter) return false;
       if (statusFilter) {
-        const isSolved = progress[problem.id] || false;
+        const isSolved = progress[problem.id.toString()] || false;
         if (statusFilter === 'solved' && !isSolved) return false;
         if (statusFilter === 'unsolved' && isSolved) return false;
       }
@@ -55,10 +55,11 @@ function App() {
 
   const percentage = problems.length > 0 ? Math.round((solvedCount / problems.length) * 100) : 0;
 
-  const toggleProblem = (id: string) => {
+  const toggleProblem = (id: number) => {
+    const key = id.toString();
     setProgress((prev) => ({
       ...prev,
-      [id]: !prev[id],
+      [key]: !prev[key],
     }));
   };
 

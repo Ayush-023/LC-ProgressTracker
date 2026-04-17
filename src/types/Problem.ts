@@ -1,7 +1,7 @@
 export interface Problem {
-  id: string;
+  id: number;
   title: string;
   difficulty: 'Easy' | 'Medium' | 'Hard';
-  topics: string[];
-  link: string;
+  topic: string;
+  url: string;
 }
